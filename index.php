@@ -22,7 +22,7 @@ switch($action) {
     default:
 
     $booked = count_total_booked_rooms();
-    $rooms - count_total_rooms();
+    $rooms = count_total_rooms();
     $available = count_available_rooms();
     include('views/dashboard.php');
 }

@@ -22,11 +22,11 @@
 <div class="dashboard">
    <div class="dashboard__container">
     <img src="views/img/room.png" alt="bedroom">
-    <h3><?= $rooms; ?> Total rooms</h3>
+    <h3><?= $rooms[0]; ?> Total rooms</h3>
    </div>
    <div class="dashboard__container">
    <img src="views/img/homework.png" alt="bedroom">
-    <h3><?= $booked; ?> rooms booked</h3>
+    <h3><?= $booked[0]; ?> rooms booked</h3>
    </div>
    <div class="dashboard__container">
    <img src="views/img/bad.png" alt="bedroom">
@@ -38,7 +38,7 @@
    </div>
    <div class="dashboard__container">
    <img src="views/img/bedroom.png" alt="bedroom">
-    <h3><?= $available; ?>rooms Available</h3>
+    <h3><?= $available[0]; ?> rooms Available</h3>
    </div>
    <div class="dashboard__container">
    <img src="views/img/teamwork.png" alt="bedroom">

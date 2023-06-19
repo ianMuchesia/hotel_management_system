@@ -29,7 +29,7 @@ function count_available_rooms(){
     global $db;
 
     $query = 'SELECT COUNT(*) FROM rooms
-    WHERE status = NULL';
+    WHERE status IS NULL';
      $statement= $db->prepare($query);
      $statement->execute();
      $count = $statement->fetch();
