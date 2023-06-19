@@ -1,5 +1,9 @@
 <?php include('models/database.php'); ?>
 
+<?php include('views/header.php'); ?>
+
+<?php include('views/sidebar.php'); ?>
+
 <?php 
 
 
@@ -17,4 +21,9 @@ switch($action) {
 
     include('views/trial.php');
 }
+?>
+
+
+
+<?php include('views/footer.php'); ?>
 

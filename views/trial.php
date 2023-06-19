@@ -1,5 +1,4 @@
-<?php include('views/header.php'); ?>
-<?php include('views/sidebar.php'); ?>
+
 
 
 	<!-- CONTENT -->
@@ -200,5 +199,3 @@
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-
-    <?php include('views/footer.php'); ?>

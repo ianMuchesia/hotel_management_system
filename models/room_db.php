@@ -1,5 +1,8 @@
 <?php 
 
+
+
+
 function add_room($room_type_id, $room_no){
     global $db;
 
@@ -91,20 +94,46 @@ function get_room_price(){
 }
 
 
-function booking($room_id, $room_type_id, $customer_name, $customer_contact, $customer_email , $customer_id_card, $total_price){
+function booking($room_id, $room_type_id, $customer_name, $customer_contact, $customer_email , $customer_id_card, $total_price, $checkin, $checkout){
 
     global $db;
-    $query ='INSERT INTO customer(name, contact, email, idCard, totalPrice, roomID, roomTypeID) VALUES(
-        :name, :contact, :email , :idCard, :totalPrice, :roomID, :roomTypeID)';
+    $customerQuery = 'INSERT INTO customer (name, contact, email, idCard, totalPrice, roomID, roomType) VALUES (
+        :name, :contact, :email , :idCard, :totalPrice, :roomID, :roomType)';
     
-    $statement = $db -> prepare($query);
-    $statement->bindValue(':roomTypeID' , $room_type_id);
-    $statement->bindValue(':roomID' , $room_id);
-    $statement->bindValue(':name' , $customer_name);
-    $statement->bindValue(':contact' , $customer_contact);
-    $statement->bindValue(':idCard' , $customer_id_card);
-    $statement->bindValue(':email' ,$customer_email);
-    $statement->bindValue(':totalPrice' , $total_price);
+    // Update room status to booked in the 'rooms' table
+    $roomQuery = 'UPDATE rooms SET status = 1 WHERE roomID = :roomID';
+    
+    // Insert booking details into the 'bookings' table
+    $bookingQuery = 'INSERT INTO bookings (idCard, roomID, checkin, checkout) VALUES (:idCard, :roomID, :checkin , :checkout)';
+    
+    // Prepare and execute the queries
+    $customerStatement = $db->prepare($customerQuery);
+    $roomStatement = $db->prepare($roomQuery);
+    $bookingStatement = $db->prepare($bookingQuery);
+    
+    $customerStatement->bindValue(':roomType', $room_type_id);
+    $customerStatement->bindValue(':roomID', $room_id);
+    $customerStatement->bindValue(':name', $customer_name);
+    $customerStatement->bindValue(':contact', $customer_contact);
+    $customerStatement->bindValue(':idCard', $customer_id_card);
+    $customerStatement->bindValue(':email', $customer_email);
+    $customerStatement->bindValue(':totalPrice', $total_price);
+    
+    $roomStatement->bindValue(':roomID', $room_id);
+    
+    $bookingStatement->bindValue(':idCard', $customer_id_card);
+    $bookingStatement->bindValue(':roomID', $room_id);
+    $bookingStatement->bindValue(':checkin', $checkin);
+    $bookingStatement->bindValue(':checkout', $checkout);
+    
+    $customerStatement->execute();
+    $roomStatement->execute();
+    $bookingStatement->execute();
+    
+    // Close the database connection
+    $customerStatement->closeCursor();
+    $roomStatement->closeCursor();
+    $bookingStatement->closeCursor();
 
 }
 
