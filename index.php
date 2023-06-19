@@ -1,4 +1,6 @@
-<?php include('models/database.php'); ?>
+<?php include('models/database.php');
+    include('models/count.php')
+?>
 
 <?php include('views/header.php'); ?>
 
@@ -19,7 +21,10 @@ if (!$action) {
 switch($action) {
     default:
 
-    include('views/trial.php');
+    $booked = count_total_booked_rooms();
+    $rooms - count_total_rooms();
+    $available = count_available_rooms();
+    include('views/dashboard.php');
 }
 ?>
 
