@@ -629,3 +629,11 @@ body {
 		gap: 2em;
 	}
 }
+
+
+
+/* Reservation Container */
+.reservation__container{
+	padding: 2em;
+	display: flex;
+}
